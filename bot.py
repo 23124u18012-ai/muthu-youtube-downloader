@@ -16,8 +16,12 @@ MAX_SECONDS = int(os.environ.get("MAX_VIDEO_SECONDS", "900"))
 MAX_MB = int(os.environ.get("MAX_FILE_MB", "45"))
 COOKIE_FILE = "/etc/secrets/cookies.txt"
 
+
 def is_youtube_url(value):
-    return bool(re.match(r"^https?://(www\\.)?(youtube\\.com|youtu\\.be)/", value, re.I))
+    import re
+    pattern = r"^https?://(?:www\.)?(?:youtube\.com|youtu\.be)/"
+    return bool(re.match(pattern, value.strip(), re.IGNORECASE))
+    
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
