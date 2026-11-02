@@ -66,8 +66,13 @@ async def download_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if info.get("duration") and info["duration"] > MAX_SECONDS else None
             ),
         }
-        if os.path.isfile(COOKIE_FILE):
-            opts["cookiefile"] = COOKIE_FILE
+        
+if os.path.isfile(COOKIE_FILE):
+    opts["cookiefile"] = COOKIE_FILE
+    print("SUCCESS: YouTube cookies file loaded")
+else:
+    print("ERROR: YouTube cookies file not found")
+    
         if query.data == "mp3":
             opts.update({
                 "format": "bestaudio/best",
