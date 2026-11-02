@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: muthu-youtube-downloader
+    runtime: python
+    plan: free
+    buildCommand: apt-get update && apt-get install -y ffmpeg && pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: MAX_VIDEO_SECONDS
+        value: "900"
+      - key: MAX_FILE_MB
+        value: "45"
